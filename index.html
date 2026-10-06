@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+body{
+    font-family: Arial;
+    text-align: center;
+}
+
+button{
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.card{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 100px;
+    
+}
+
+.caro{
+    background-color: rgb(235, 42, 42);
+    color: white;
+}
+
+.barato{
+    background-color: green;
+    color: white;
+}
+
+.desconto{
+    background-color: blueviolet;
+    color: white;
+}
+
+
+
+
+
+</style>
+<body>
+    
+<h1>Painel de Produtos</h1>
+
+<button onclick="mostrarPrecos()">Mostrar Preços</button>
+<button onclick="produtosCaros()">Acima de R$ 20</button>
+<button onclick="produtosBaratos()">Abaixo de R$20</button>
+<button onclick="totalCompra()">Total</button>
+<button onclick="aplicarDesconto()">Desconto 10%</button>
+
+<div id="resultado"></div>
+
+<script>
+const precos = [10, 25, 5, 50, 30];
+
+function mostrarPrecos() {
+    let html = "";
+
+    precos.forEach(preco => {
+        html += `<div class="card">R$ ${preco}</div>`;
+    });
+    document.getElementById("resultado").innerHTML = html;
+}
+
+function produtosCaros() {
+    const caros = precos.filter(preco => preco > 20);
+    let html = "";
+
+    caros.forEach(preco => {
+        html += `<div class="card caro">R$ ${preco}</div>`
+    })
+
+    document.getElementById("resultado").innerHTML = html;
+}
+
+function produtosBaratos() {
+    const baratos = precos.filter(preco => preco <= 20);
+    let html = "";
+
+    baratos.forEach(preco => {
+        html += `<div class="card barato">R$ ${preco}</div>`;
+    })
+
+    document.getElementById("resultado").innerHTML = html;
+}
+
+function totalCompra() {
+    const total = precos.reduce((soma,preco) => soma + preco, 0);
+
+    document.getElementById("resultado").innerHTML = `<h2>Total: R$ ${total.toFixed(2)}</h2>`
+}
+
+function aplicarDesconto(){
+    const comDesconto = precos.map(preco => preco*0.9);
+    let html = "";
+
+    comDesconto.forEach(preco => {
+        html += `<div class="card desconto">R$ ${preco.toFixed(2)}</div>`
+    })
+
+    document.getElementById("resultado").innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>
